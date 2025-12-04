@@ -58,7 +58,9 @@ def run_experiment(agent: BaseWarehouseAgent, env, episodes=100, save_dir="part3
     print(f"\n--- Starting experiment with {agent_name} (Episodes: {episodes}) ---")
     
     # 確保 models 資料夾存在
+    save_dir = os.path.join(os.path.dirname(__file__), '..', 'models')
     if not os.path.exists(save_dir):
+        print(f"Creating directory: {save_dir}")
         os.makedirs(save_dir)
 
     for episode in range(1, episodes + 1):
@@ -71,8 +73,8 @@ def run_experiment(agent: BaseWarehouseAgent, env, episodes=100, save_dir="part3
              print(f"Episode {episode}: Total Reward = {total_reward}, Epsilon = {current_epsilon:.4f}")
 
     # 示範 Overloading：使用不同的參數呼叫相同的 save_model 函式
-    agent.save_model(f"../models/{agent_name}_q_table.pkl")
-    agent.save_model(f"../models/{agent_name}_config.pkl", include_q_table=False)
+    agent.save_model(os.path.join(save_dir, f"{agent_name}_q_table.pkl"))
+    agent.save_model(os.path.join(save_dir, f"{agent_name}_config.pkl"), include_q_table=False)
 
 
 if __name__ == "__main__":
