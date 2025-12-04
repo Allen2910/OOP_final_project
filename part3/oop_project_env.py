@@ -56,7 +56,7 @@ class WarehouseRobotEnv(gym.Env):
 
         # Construct the observation state:
         # [robot_row_pos, robot_col_pos, target_row_pos, target_col_pos]
-        obs = np.concatenate((self.warehouse_robot.robot_pos, self.warehouse_robot.target_pos))
+        obs = np.concatenate((self.warehouse_robot.robot_pos, self.warehouse_robot.target_pos)).astype(np.int32)
         
         # Additional info to return. For debugging or whatever.
         info = {}
@@ -82,7 +82,7 @@ class WarehouseRobotEnv(gym.Env):
 
         # Construct the observation state: 
         # [robot_row_pos, robot_col_pos, target_row_pos, target_col_pos]
-        obs = np.concatenate((self.warehouse_robot.robot_pos, self.warehouse_robot.target_pos))
+        obs = np.concatenate((self.warehouse_robot.robot_pos, self.warehouse_robot.target_pos)).astype(np.int32)
 
         # Additional info to return. For debugging or whatever.
         info = {}
