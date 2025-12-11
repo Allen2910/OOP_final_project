@@ -73,7 +73,12 @@ class RobotAgent(ABC):
         self.planner = AStarPlanner(grid_rows, grid_cols)
         self.current_path = []
         self.last_target_pos = None # 追蹤上一次的目標位置
-    
+        
+    def reset_agent(self):
+        """清除路徑緩存，在新任務開始時呼叫"""
+        self.current_path = []
+        self.last_target_pos = None
+
     @abstractmethod
     def get_action(self, my_index, all_robot_positions, target_pos, grid_rows, grid_cols):
         """
