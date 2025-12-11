@@ -75,7 +75,6 @@ def run(episodes, is_training=True, render=False):
         pickle.dump(q, f)
         f.close()
 
-import numpy as np
 
 def value_iteration(env, gamma=0.99, theta=1e-8):
     """
@@ -115,7 +114,7 @@ def value_iteration(env, gamma=0.99, theta=1e-8):
     return policy
 
 def run_value_iteration(episodes=5000, render=False, load=False):
-    env = gym.make('FrozenLake-v1', map_name="8x8", is_slippery=True, render_mode='human' if render else None)
+    env = gym.make('FrozenLake-v1', map_name="8x8", is_slippery=True, success_rate=0.4, render_mode='human' if render else None)
 
     # ---------------- load or compute policy ----------------
     if load:
@@ -142,6 +141,29 @@ def run_value_iteration(episodes=5000, render=False, load=False):
 
     # ---------------- print results ----------------
     print_success_rate(rewards_per_episode)
+
+    # 繪圖: 計算滾動總和 (Rolling Sum) 或 平均值
+    # 你原本的程式碼是計算過去 100 回合的總和
+    sum_rewards = np.zeros(episodes)
+    window_size = 100
+    
+    for t in range(episodes):
+        # 取 max(0, t-100) 到 t+1 的區間總和
+        sum_rewards[t] = np.sum(rewards_per_episode[max(0, t - window_size):(t + 1)])
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(sum_rewards)
+    plt.title(f"Value Iteration Evaluation (8x8)\nRolling Sum of Rewards (Window={window_size})")
+    plt.xlabel("Episodes")
+    plt.ylabel("Sum of Rewards (Last 100 episodes)")
+    plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+    
+    # 存檔圖片
+    img_filename = 'frozen_lake8x8_value_iteration.png'
+    plt.savefig(img_filename)
+    print(f"結果圖表已儲存至: {img_filename}")
+
+    # plt.show() 
 
     env.close()
 
@@ -235,7 +257,7 @@ if __name__ == '__main__':
     run_value_iteration(episodes=2000, render=False, load=True)
 
     # run(15000)
-    # run(1, is_training=False, render=True)
+    # run(2000, is_training=False, render=False)
 
     # run_sarsa(15000)
     # run_sarsa(2000, is_training=False, render=False)
