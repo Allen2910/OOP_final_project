@@ -2,6 +2,11 @@ import gymnasium as gym
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
+from gymnasium.envs.toy_text.frozen_lake import generate_random_map
+
+# 設定種子碼 (Seed) 以生成固定的地圖
+seed_value = 42
+random_map = generate_random_map(size=8, p=0.8, seed=seed_value)
 
 
 def print_success_rate(rewards_per_episode):
@@ -114,7 +119,7 @@ def value_iteration(env, gamma=0.99, theta=1e-8):
     return policy
 
 def run_value_iteration(episodes=5000, render=False, load=False):
-    env = gym.make('FrozenLake-v1', map_name="8x8", is_slippery=True, success_rate=0.4, render_mode='human' if render else None)
+    env = gym.make('FrozenLake-v1', desc=random_map, is_slippery=True, render_mode='human' if render else None)
 
     # ---------------- load or compute policy ----------------
     if load:
@@ -252,9 +257,11 @@ def run_sarsa(episodes, is_training=True, render=False):
             pickle.dump(q, f)
 
 
+
 if __name__ == '__main__':
     run_value_iteration(episodes=15000, render=False, load=False)
     run_value_iteration(episodes=2000, render=False, load=True)
+    # run_value_iteration(episodes=1, render=True, load=True)
 
     # run(15000)
     # run(2000, is_training=False, render=False)
