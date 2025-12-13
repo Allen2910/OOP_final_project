@@ -23,6 +23,7 @@ MAX_STEPS_PER_MISSION: This variable is the limit step to a mission.
 execute
 -------
 python pygame
+
 python main.py
 
 # Dependencies
