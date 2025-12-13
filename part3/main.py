@@ -8,10 +8,10 @@ import random
 import sys
 import pygame 
 
-RENDER_FLAG = 1 # 0 for experienment mdoe; 1 for render mdoe
+RENDER_FLAG = 0 # 0 for experienment mdoe; 1 for render mdoe
 
 # map size
-GRID_R, GRID_C = 10, 10
+GRID_R, GRID_C = 20, 20
 
 if RENDER_FLAG == 1:
     print("--- RENDER MODE ---")
@@ -21,7 +21,7 @@ if RENDER_FLAG == 1:
 else:
     print("--- EXPERIENMENT MODE ---")
     FPS = 0
-    MAX_MISSIONS = 100
+    MAX_MISSIONS = 1000
     MAX_STEPS_PER_MISSION = 300
 
 def run_mission(env: WarehouseRobot, team: list, team_name: str, render_mode):
@@ -138,7 +138,7 @@ def run_experiment():
     
     print("\n==================================================")
     if RENDER_FLAG == 0:
-        print(f"🏆 {MAX_MISSIONS} RESULT")
+        print(f"🏆 {MAX_MISSIONS} RESULT MAP: {GRID_R}*{GRID_C}")
         print("--------------------------------------------------")
         print(f"1. COLLABORATION TEAM ({team_collaboration[0].name} & {team_collaboration[1].name}):")
         print(f"   Average Steps: {team_1_results['avg_steps']:.2f}")
