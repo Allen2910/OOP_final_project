@@ -1,37 +1,60 @@
-# Part3
+# AI Project: Reinforcement Learning & Multi-Agent Search
 
-# Overview
-The goal to the project is to find the kaggle in a map. There are two robot with A* algorithm to find the kaggle together.
-The A* heuristic is manhattan distance.
-Two Bot will regard each other as a block.
-Bot A's target is kaggle, while Bot B's target is Bot A initially
-If the Bot B's distance to kaggle is less than 5 step, Bot B's target becomes kaggle.
+## Project Overview
 
-# How to run
+### Part 1: Test
+Basic testing module.
 
-main.py
--------
-You can change the variable **RENDER_FLAG** to determine if you want the experienment mode or render mode.
-ender mode: Only execute twice, first time will domestrate how two bot work together, second time will domestrate only Bot A working as comparison.
-Experienment mdoe: The mode will domestrate how it work if there are 1000 kaggle(default, you can change it).
+### Part 2: Reinforcement Learning
+* **Goal:** Optimize the agent to achieve a total accuracy of at least **70%**.
+* **Environment:** Frozen Lake (Gymnasium).
 
-Map size: You can adjust the variable **GRID_R** and **GRID_C** to whatever you want.
+### Part 3: Cooperative Search (A* Algorithm)
+The goal of this project is to locate the "Kaggle" target on a map. Two robots (Bot A and Bot B) utilize the A* algorithm to find the target together.
 
-MAX_MISSION: This variable means how many kaggles are there, but you can change it in **Render Mode**.
-MAX_STEPS_PER_MISSION: This variable is the limit step to a mission.
+* **Heuristic:** Manhattan Distance.
+* **Collision:** Each bot regards the other as an obstacle/block.
+* **Strategy:**
+    * **Bot A:** Target is "Kaggle".
+    * **Bot B:** Initially targets Bot A. If Bot B's distance to "Kaggle" is less than **5 steps**, Bot B's target switches to "Kaggle".
 
-execute
--------
-python pygame
+---
 
+## Dependencies
+
+Please ensure you have the following libraries installed:
+
+### Part 2 Libraries
+* `pickle`
+* `numpy`
+* `matplotlib`
+* `gymnasium`
+
+### Part 3 Libraries
+* `pygame`
+
+*(Note: The project also uses a local `sprites` module to render the pictures of bots, floors, and kaggles.)*
+
+---
+
+## How to Run
+
+### Part 2 Execution
+Run the Reinforcement Learning script:
+```bash
+python ./frozen_lake.py
+```
+
+### Part 3 Execution
+Run the main A* search simulation:
+```bash
 python main.py
+```
 
-# Dependencies
+## Contribution List
 
-pygame
-------
-Graph Render and environment simulate
-
-sprites
--------
-Render the picture of bot, floor and kaggle
+| Student ID | Name | Contribution | Content |
+| :--- | :--- | :--- | :--- |
+| **B123040030** | 劉兆涵 | **40%** | Finished Part 2 |
+| **B123040031** | 許耕瑜 | **30%** | Finished Part 3 |
+| **B123040010** | 王紹庭 | **30%** | Finished PPT |
